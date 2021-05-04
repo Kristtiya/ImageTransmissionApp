@@ -1,0 +1,37 @@
+%% Select and Create .Dat File from Images
+prompt_img_select = 'Select image:';
+Image = input(prompt_img_select,'s');
+RGBorGray = 'Is this image Grayscale (0) or RGB (1)?:';
+ColorType = input(RGBorGray);
+
+if ColorType ==0
+    Prompt_WantedType = 'Binary[2bits] or Grayscale [4bits]: Binary (0) or Grayscale (1)';
+    ColorWant = input(Prompt_WantedType);
+end
+
+if ColorType ==1
+    Prompt_WantedType = 'What image format do you want: Binary(0), Grayscale(1), RGB(2)?';
+    ColorWant = input(Prompt_WantedType);
+end
+
+
+prompt_mod_type = 'Select Modulation Type: BPSK , OFDM:';
+Mod_type = input(prompt_mod_type,'s');
+
+%Need to implement rgb
+BinaryImage = Img2Bin(Image,ColorType,ColorWant,.45);
+% if ColorType==0 && ColorWant == 0 %Grayscale image turned to Binary
+%     Array_of_Image = BinaryImg2Array(BinaryImage);
+% elseif ColorType==0 && ColorWant == 1
+%     
+% elseif ColorType==1 && ColorWant == 0 %RGBImage to Threshold Grayscale
+%     
+% elseif ColorType==1 && ColorWant == 1 
+%     
+% end
+ %Y = ImagetoDat(Array_of_Image,Mod_type);
+
+%% Read Rx File and Demodulate
+Marker = load('Marker.mat');
+recovered = ReadBPSK('BPSK_tx.dat');
+

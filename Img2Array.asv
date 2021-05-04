@@ -1,0 +1,21 @@
+function Y_Data = Img2Array(Image,Target_Data_Type)
+    % Image = Image that user wants to convert to a 1 dimensional array
+    % Target_Data_Type = If the resulting data is binary or RGB
+    %       - 2Bit:
+    %       - 4Bit:
+    % Y = 1 Dimensional Array
+    %
+    
+    A = Image';
+    Array_Scaled = A(:)';
+    if strcmp(Target_Data_Type,'2Bit')
+        Y_Data = Array_Scaled > 256; %If value is 256, turn to 1
+        Y_Data(Y_Data=0) = -1;
+    elseif strcmp(Target_Data_Type,'4Bit')
+        Array(Array=50) = 0;
+        Array(Array=50 & Array<100) = 75;
+        Array(Array=100 & Array<150) = 150;
+        Array(Array=150) = 256;
+        Threshold_Array = Array;
+    end
+end
